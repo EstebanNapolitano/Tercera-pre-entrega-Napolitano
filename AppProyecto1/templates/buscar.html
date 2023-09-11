@@ -1,0 +1,49 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+    <h1>Buscar</h1>
+
+    <form method="get" action="{% url 'buscar' %}">
+        <h3>Buscar tareas</h3>
+        <button type="submit" name="tipo_busqueda" value="tarea">Buscar tareas</button>
+    </form>
+    
+    {% if tipo_busqueda == 'tarea' %}
+        <h3>Resultados de búsqueda de tareas:</h3>
+        <ul>
+            {% for tarea in resultados %}
+                <li>{{ tarea.nombredetarea }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="get" action="{% url 'buscar' %}">
+        <h3>Buscar proyectos</h3>
+        <button type="submit" name="tipo_busqueda" value="proyecto">Buscar proyectos</button>
+    </form>
+
+    {% if tipo_busqueda == 'proyecto' %}
+        <h3>Resultados de búsqueda de proyectos:</h3>
+        <ul>
+            {% for proyecto in resultados %}
+                <li>{{ proyecto.nombredeproyecto }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="get" action="{% url 'buscar' %}">
+        <h3>Buscar miembros</h3>
+        <button type="submit" name="tipo_busqueda" value="miembro">Buscar miembros</button>
+    </form>
+
+    {% if tipo_busqueda == 'miembro' %}
+        <h3>Resultados de búsqueda de miembros:</h3>
+        <ul>
+            {% for miembro in resultados %}
+                <li>{{ miembro.nombre }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+</form>
+{% endblock ContendoQueCambia %}

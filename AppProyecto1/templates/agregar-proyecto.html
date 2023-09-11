@@ -1,0 +1,15 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+
+<h3>Agregar nuevo proyecto</h3>
+
+<form method="POST" action="{% url 'agregar-proyecto' %}">
+    {% csrf_token %}
+
+    {{nuevoproyecto.as_p}}
+        
+    <button type="submit">Guardar</button>
+
+</form>
+{% endblock ContendoQueCambia %}

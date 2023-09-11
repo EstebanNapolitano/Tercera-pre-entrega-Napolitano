@@ -1,0 +1,22 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+
+<h1>Vista de tareas</h1>
+<h3>Agregar nueva tarea</h3>
+<form method="POST" action="{% url 'agregar-tarea' %}">
+    {% csrf_token %}
+
+    <p>Tarea: <input type="text" name="nombredetarea"></p>
+    <p>Estado:
+        <select name="estado">
+            <option value="TO DO">TO DO</option>
+            <option value="WIP">WIP</option>
+            <option value="DONE">DONE</option>
+        </select>
+    </p>
+    <button type="submit">Guardar</button>
+
+
+</form>
+{% endblock ContendoQueCambia %}   

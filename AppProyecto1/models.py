@@ -15,8 +15,10 @@ class Tarea (models.Model):
     def __str__(self):
         return self.nombredetarea
     
-class Poyecto (models.Model):
+class Proyecto (models.Model):
+    
     nombredeproyecto = models.CharField(max_length=40)
+    descripcion = models.TextField(null=True, blank=True)
 
 class Miembro (models.Model):
     nombre = models.CharField(max_length=40)

@@ -1,0 +1,22 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+
+<h1>Vista de Miembros</h1>
+
+<h3>Agregar nuevo miembro</h3>
+<form method="POST" action="{% url 'agregar-miembro' %}">
+    {% csrf_token %}
+
+    <p>Nombre y apellido: <input type="text" name="nombre"></p>
+
+    <button type="submit">Guardar</button>
+
+
+
+
+
+
+        
+</form>
+{% endblock ContendoQueCambia %}

@@ -1,0 +1,22 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+
+<h1>Vista de Proyectos</h1>
+<h3>Agregar nuevo proyecto</h3>
+<form method="POST" action="{% url 'agregar-proyecto' %}">
+    {% csrf_token %}
+
+    <p>Proyecto: <input type="text" name="nombredeproyecto"></p>
+    <p>Descripción: <textarea name="descripcion"></textarea></p>
+    <style>
+        textarea {
+            height: 66px;
+            width: 350px;
+        }
+    </style>
+    
+    <button type="submit">Guardar</button>
+    
+</form>
+{% endblock ContendoQueCambia %}
