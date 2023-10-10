@@ -1,0 +1,39 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}    
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Contacto</title>
+    </head>
+    <body>
+        <h1>Contacto</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enviar</button>
+        </form>
+
+        {% if form.errors %}
+            <div class="errors">
+                <p>Por favor, corrige los siguientes errores:</p>
+                <ul>
+                    {% for field, error_list in form.errors.items %}
+                        {% for error in error_list %}
+                            <li>{{ field|escape }}: {{ error|escape }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if request.GET.contacto_exito %}
+            <div class="success">
+                <p>¡Mensaje enviado con éxito!</p>
+                <p>Gracias por contactarnos. Nos pondremos en contacto contigo pronto.</p>
+            </div>
+        {% endif %}
+    </body>
+    </html>
+
+{% endblock ContendoQueCambia %}

@@ -1,0 +1,12 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+
+<h1>Detalles de la Tarea</h1>
+    <p><strong>Nombre de la Tarea:</strong> {{ tarea.nombredetarea }}</p>
+    <p><strong>Estado:</strong> {{ tarea.estado }}</p>
+    <p><strong>Proyecto al que pertenece la tarea:</strong> {{ tarea.proyecto.nombredeproyecto }}</p>
+    <p><strong>Miembro asignado a la tarea:</strong> {{ tarea.miembro.nombre }}</p>
+
+    <a href="{% url 'buscar' %}" class="btn btn-primary btn-sm">Atrás</a>
+{% endblock ContendoQueCambia %}

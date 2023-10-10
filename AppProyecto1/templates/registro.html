@@ -1,0 +1,13 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+<form action ="{% url 'Registrar' %}" method="POST">
+    {% csrf_token %}
+
+    {{miFormulario.as_p}}
+    
+    <button type="submit">Registrarse</button>
+
+</form>
+
+{% endblock ContendoQueCambia %}

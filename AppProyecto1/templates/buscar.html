@@ -12,7 +12,10 @@
         <h3>Resultados de búsqueda de tareas:</h3>
         <ul>
             {% for tarea in resultados %}
-                <li>{{ tarea.nombredetarea }}</li>
+                <li>
+                    {{ tarea.nombredetarea }}
+                    <a href="{% url 'detalle_tarea' tarea.id %}" class="btn btn-primary btn-sm">Leer más</a>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -26,7 +29,10 @@
         <h3>Resultados de búsqueda de proyectos:</h3>
         <ul>
             {% for proyecto in resultados %}
-                <li>{{ proyecto.nombredeproyecto }}</li>
+                <li>
+                    {{ proyecto.nombredeproyecto }}
+                    <a href="{% url 'detalle_proyecto' proyecto.id %}" class="btn btn-primary btn-sm">Leer más</a>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -40,7 +46,10 @@
         <h3>Resultados de búsqueda de miembros:</h3>
         <ul>
             {% for miembro in resultados %}
-                <li>{{ miembro.nombre }}</li>
+                <li>
+                    {{ miembro.nombre }}
+                    <a href="{% url 'detalle_miembro' miembro.id %}" class="btn btn-primary btn-sm">Leer más</a>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}

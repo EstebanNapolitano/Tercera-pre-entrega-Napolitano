@@ -1,0 +1,21 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+<h1>Editar perfil</h1>
+
+    <div class="text-center">
+      <img height="40px" src="{{url_avatar}}">
+    </div>
+
+<form action="{% url 'editarPerfil' %}" method="POST">{% csrf_token %}
+
+    {{ miFormulario.as_p}}
+
+  <button type="submit"> Editar </button>
+
+</form>
+
+<a href="{% url 'agregar-avatar' %}" class="btn btn-primary">Agregar o cambiar avatar</a>
+
+
+{% endblock ContendoQueCambia %}

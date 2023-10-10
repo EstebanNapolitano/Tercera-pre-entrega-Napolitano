@@ -1,0 +1,16 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+
+<h1>Detalles del Miembro</h1>
+<p><strong>Nombre del Miembro:</strong> {{ miembro.nombre }}</p>
+<p><strong>Tareas asignadas:</strong></p>
+
+<ul>
+    {% for tarea in miembro.tarea_set.all %}
+        <li>{{ tarea.nombredetarea }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'buscar' %}" class="btn btn-primary btn-sm">Atrás</a>
+{% endblock ContendoQueCambia %}

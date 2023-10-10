@@ -2,14 +2,43 @@
 
 {% block ContendoQueCambia %}
 
-<h3>Agregar nuevo proyecto</h3>
+    <h3>Agregar nuevo proyecto</h3>
 
-<form method="POST" action="{% url 'agregar-proyecto' %}">
-    {% csrf_token %}
+    <form method="POST" action="{% url 'agregar-proyecto' %}">
+        {% csrf_token %}
 
-    {{nuevoproyecto.as_p}}
-        
-    <button type="submit">Guardar</button>
-
-</form>
+        {{nuevoproyecto.as_p}}
+            
+        <div class="form-group">
+            <label for="{{ nuevoproyecto.nombredeproyecto.id_for_label }}">Nombre del Proyecto:</label>
+            {{ nuevoproyecto.nombredeproyecto }}
+        </div>
+    
+        <div class="form-group">
+            <label for="{{ nuevoproyecto.subtitulo.id_for_label }}">Subtítulo:</label>
+            {{ nuevoproyecto.subtitulo }}
+        </div>
+    
+        <div class="form-group">
+            <label for="{{ nuevoproyecto.descripcion.id_for_label }}">Descripción:</label>
+            {{ nuevoproyecto.descripcion }}
+        </div>
+    
+        <div class="form-group">
+            <label for="{{ nuevoproyecto.miembro.id_for_label }}">Miembro:</label>
+            {{ nuevoproyecto.miembro }}
+        </div>
+    
+        <div class="form-group">
+            <label for="{{ nuevoproyecto.fechaDeCreacion.id_for_label }}">Fecha de Creación:</label>
+            {{ nuevoproyecto.fechaDeCreacion }}
+        </div>
+    
+        <div class="form-group">
+            <label for="{{ nuevoproyecto.imagen.id_for_label }}">Imagen:</label>
+            {{ nuevoproyecto.imagen }}
+        </div>
+    
+        <button type="submit">Guardar</button>
+    </form>
 {% endblock ContendoQueCambia %}

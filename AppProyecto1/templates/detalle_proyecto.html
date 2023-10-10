@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+
+{% block ContendoQueCambia %}
+
+    <h1>Detalles del Proyecto</h1>
+    <p><strong>Nombre del Proyecto:</strong> {{ proyecto.nombredeproyecto }}</p>
+    <p><strong>Subtítulo:</strong> {{ proyecto.subtitulo }}</p>
+    <p><strong>Descripción:</strong> {{ proyecto.descripcion }}</p>
+    <p><strong>Fecha de Creación:</strong> {{ proyecto.fechaDeCreacion }}</p>
+
+    {% if proyecto.imagen %}
+        <p><strong>Imagen:</strong></p>
+        <img src="{{ proyecto.imagen.url }}" alt="{{ proyecto.nombredeproyecto }} Image" height="200">
+    {% endif %}
+
+    <p><strong>Tareas del proyecto:</strong></p>
+
+    <ul>
+        {% for tarea in proyecto.tareas_asociadas.all %}
+            <li>{{ tarea.nombredetarea }}</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'buscar' %}" class="btn btn-primary btn-sm">Atrás</a>
+{% endblock ContendoQueCambia %}

@@ -17,8 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from AppProyecto1.views import *
+from django.conf import settings
+from django.conf.urls.static import static
+from AppProyecto2.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app-proyecto1/', include ('AppProyecto1.urls')),
+   
 ]
+
+urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

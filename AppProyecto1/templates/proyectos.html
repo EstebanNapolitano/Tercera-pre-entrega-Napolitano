@@ -4,19 +4,25 @@
 
 <h1>Vista de Proyectos</h1>
 <h3>Agregar nuevo proyecto</h3>
-<form method="POST" action="{% url 'agregar-proyecto' %}">
+<form method="POST" action="{% url 'agregar-proyecto' %}" enctype="multipart/form-data">
     {% csrf_token %}
 
     <p>Proyecto: <input type="text" name="nombredeproyecto"></p>
+    <p>Subtitulo: <input type="text" name="subtitulo"></p>
     <p>Descripción: <textarea name="descripcion"></textarea></p>
-    <style>
-        textarea {
-            height: 66px;
-            width: 350px;
-        }
-    </style>
+    <p>Miembro:
+        <select name="miembro">
+            {% for miembro in miembros %}
+                <option value="{{ miembro.id }}">{{ miembro.nombre }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>Fecha de Creación: <input type="date" name="fechaDeCreacion"></p>
+    <p>Imagen: <input type="file" name="imagen"></p>
     
     <button type="submit">Guardar</button>
     
 </form>
 {% endblock ContendoQueCambia %}
+
+
