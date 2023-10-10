@@ -52,7 +52,6 @@ def about(req):
         return render (req, 'about.html')
 
 @login_required(login_url='/app-proyecto1/login')
-@login_required(login_url='/app-proyecto1/login')
 def agregar_tarea(req):
     print('method', req.method)
     print('POST', req.POST)
