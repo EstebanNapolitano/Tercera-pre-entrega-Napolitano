@@ -2,21 +2,46 @@
 
 {% block ContendoQueCambia %}
 
-<h1>Vista de tareas</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+<h1>Vista de Tareas</h1>
 <h3>Agregar nueva tarea</h3>
 <form method="POST" action="{% url 'agregar-tarea' %}">
     {% csrf_token %}
-
-    <p>Tarea: <input type="text" name="nombredetarea"></p>
+    
+    <p>Nombre de la Tarea: <input type="text" name="nombredetarea" required></p>
+    
     <p>Estado:
-        <select name="estado">
-            <option value="TO DO">TO DO</option>
-            <option value="WIP">WIP</option>
-            <option value="DONE">DONE</option>
+        <select name="estado" required>
+            <option value="TO DO">To Do</option>
+            <option value="WIP">Work in Progress</option>
+            <option value="DONE">Done</option>
         </select>
     </p>
-    <button type="submit">Guardar</button>
-
-
+    
+    <p>Proyecto:
+        <select name="proyecto">
+            <option value="" selected>Sin proyecto asociado</option>
+            {% for proyecto in proyectos %}
+                <option value="{{ proyecto.id }}">{{ proyecto.nombredeproyecto }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    
+    <button type="submit">Guardar Tarea</button>
+    
 </form>
-{% endblock ContendoQueCambia %}   
+
+<ul>
+    {% for tarea in tareas %}
+        <li>{{ tarea.nombredetarea }} - {{ tarea.estado }} - Proyecto: {{ tarea.proyecto }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock ContendoQueCambia %}

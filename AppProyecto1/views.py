@@ -1,13 +1,11 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from .models import *
 from .forms import *
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -53,21 +51,25 @@ def about(req):
 
 @login_required(login_url='/app-proyecto1/login')
 def agregar_tarea(req):
-    print('method', req.method)
-    print('POST', req.POST)
-    
     if req.method == 'POST':
         nuevatarea = TareaFormulario(req.POST)
 
         if nuevatarea.is_valid():
             data = nuevatarea.cleaned_data
-            tarea = Tarea(nombredetarea=req.POST["nombredetarea"], estado=req.POST["estado"])
+            tarea = Tarea(
+                nombredetarea=data["nombredetarea"],
+                estado=data["estado"],
+                proyecto=data.get("proyecto")
+            )
             tarea.save()
+
+            messages.success(req, 'Tarea agregada con éxito.')
 
             return render(req, 'tareas.html')
     else:
         nuevatarea = TareaFormulario()
-        return render(req, 'agregar-tarea.html')
+
+    return render(req, 'agregar-tarea.html', {'nuevatarea': nuevatarea})
 
     
 @login_required(login_url='/app-proyecto1/login')
@@ -83,10 +85,13 @@ def agregar_miembro(req):
             miembro = Miembro(nombre=req.POST["nombre"]) 
             miembro.save()
 
+            messages.success(req, 'Miembro agregado con éxito.')
+
             return render(req, 'miembros.html')
      else:
         nuevomiembro = MiembroFormulario()
-        return render(req, 'agregar-miembro.html')
+    
+     return render(req, 'agregar-miembro.html')
 
 
 @login_required(login_url='/app-proyecto1/login')
@@ -94,7 +99,7 @@ def agregar_proyecto(req):
     print('method', req.method)
     print('POST', req.POST)
 
-    if req.method =='POST':
+    if req.method == 'POST':
         nuevoproyecto = ProyectoFormulario(req.POST, req.FILES)
 
         if nuevoproyecto.is_valid():
@@ -112,10 +117,13 @@ def agregar_proyecto(req):
             ) 
             proyecto.save()
 
+            messages.success(req, 'Proyecto agregado con éxito.')
+
             return render(req, 'proyectos.html', {"miembros": Miembro.objects.all()})
     else:
         nuevoproyecto = ProyectoFormulario()
-        return render(req, 'agregar-proyecto.html')
+    
+    return render(req, 'agregar-proyecto.html')
 
 @login_required(login_url='/app-proyecto1/login')
 def buscar(request):

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
-from .models import Avatar, Tarea, Proyecto
+from .models import Avatar, Proyecto
 
 
 class TareaFormulario(forms.Form):
@@ -13,6 +13,11 @@ class TareaFormulario(forms.Form):
 
     nombredetarea = forms.CharField(max_length=40)
     estado = forms.ChoiceField(choices=ESTADO_CHOICES)
+    proyecto = forms.ModelChoiceField(
+        queryset=Proyecto.objects.all(),
+        required=False,
+        empty_label='Sin proyecto asociado'
+    )
 
 
 class ProyectoFormulario(forms.Form):

@@ -13,13 +13,10 @@ class ProyectoAdmin(admin.ModelAdmin):
     mostrar_tareas_asociadas.short_description = 'Tareas Asociadas'
 
 class TareaAdmin(admin.ModelAdmin):
-    list_display = ('nombredetarea', 'estado', 'proyecto_nombre', 'miembro_nombre', 'mostrar_proyectos_asociados')
+    list_display = ('nombredetarea', 'estado', 'proyecto_nombre', 'mostrar_proyectos_asociados')
 
     def proyecto_nombre(self, obj):
         return obj.proyecto.nombredeproyecto if obj.proyecto else ''
-
-    def miembro_nombre(self, obj):
-        return obj.miembro.nombre if obj.miembro else ''
 
     def mostrar_proyectos_asociados(self, obj):
         proyectos = obj.proyectos_asociados()
@@ -27,7 +24,6 @@ class TareaAdmin(admin.ModelAdmin):
         return proyectos_str
 
     proyecto_nombre.short_description = 'Proyecto'
-    miembro_nombre.short_description = 'Miembro'
     mostrar_proyectos_asociados.short_description = 'Proyectos Asociados'
 
 admin.site.register(Proyecto, ProyectoAdmin)

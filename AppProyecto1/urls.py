@@ -29,7 +29,8 @@ urlpatterns = [
     path('contacto/', contacto, name='contacto'),
     path('app-proyecto1/contacto-exito/', contacto_exito, name='contacto-exito'),
     ]
-# AGREGAR LOS CAMPOS QUE AGREGAMOS A PROYECTO, A TODOS LOS MODELOS, HACER EL VIDEO, SUBIR LOS CASOS, ACTUALIZAR REPO Y LISTO
+# AGREGAR LOS CAMPOS QUE AGREGAMOS A PROYECTO, A TODOS LOS MODELOS, HACER EL VIDEO, SUBIR LOS CASOS Y LISTO
+# PROBAR SI LA WEB SIGUE FUNCIONANDO RETIRANDO LOS {{nuevoproyecto.as_p}} Y {{ nuevatarea.as_p }} EN AGREGAR PROYECTO Y TAREA.HTML
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

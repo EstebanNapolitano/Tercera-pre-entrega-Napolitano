@@ -33,8 +33,10 @@ class Tarea(models.Model):
 
     nombredetarea = models.CharField(max_length=40)
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
-    proyecto = models.ForeignKey(Proyecto, null=True, default=None, on_delete=models.CASCADE)
-    miembro = models.ForeignKey(Miembro, null=True, default=None, on_delete=models.CASCADE)
+    proyecto = models.ForeignKey(Proyecto, null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.nombredetarea} - {self.estado}'
 
     def __str__(self):
         return f'{self.nombredetarea} - {self.estado}'

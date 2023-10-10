@@ -4,12 +4,25 @@
 
 <h3>Agregar nueva tarea</h3>
 
-<form method="POST" action="">
+<form method="POST" action="{% url 'agregar-tarea' %}">
     {% csrf_token %}
-
-    {{nuevatarea.as_p}}
-
-    <button type="submit">Guardar</button>
-
+    
+    
+    <div class="form-group">
+        <label for="{{ nuevatarea.nombredetarea.id_for_label }}">Nombre de la Tarea:</label>
+        {{ nuevatarea.nombredetarea }}
+    </div>
+    
+    <div class="form-group">
+        <label for="{{ nuevatarea.estado.id_for_label }}">Estado:</label>
+        {{ nuevatarea.estado }}
+    </div>
+    
+    <div class="form-group">
+        <label for="{{ nuevatarea.proyecto.id_for_label }}">Proyecto:</label>
+        {{ nuevatarea.proyecto }}
+    </div>
+    
+    <button type="submit">Guardar Tarea</button>
 </form>
 {% endblock ContendoQueCambia %}
