@@ -1,12 +1,12 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import *
 from .forms import *
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 # Create your views here.
 
 def inicio(req):
@@ -51,6 +51,7 @@ def about(req):
 
 @login_required(login_url='/app-proyecto1/login')
 def agregar_tarea(req):
+    
     if req.method == 'POST':
         nuevatarea = TareaFormulario(req.POST)
 
@@ -74,8 +75,6 @@ def agregar_tarea(req):
     
 @login_required(login_url='/app-proyecto1/login')
 def agregar_miembro(req):
-     print('method', req.method)
-     print('POST', req.POST)
 
      if req.method =='POST':
         nuevomiembro = MiembroFormulario(req.POST)
@@ -93,19 +92,24 @@ def agregar_miembro(req):
     
      return render(req, 'agregar-miembro.html')
 
-
 @login_required(login_url='/app-proyecto1/login')
 def agregar_proyecto(req):
-    print('method', req.method)
-    print('POST', req.POST)
 
     if req.method == 'POST':
         nuevoproyecto = ProyectoFormulario(req.POST, req.FILES)
 
         if nuevoproyecto.is_valid():
             data = nuevoproyecto.cleaned_data
+
             miembro_id = req.POST.get("miembro")
-            miembro = Miembro.objects.get(pk=miembro_id)
+            if miembro_id:
+                try:
+                    miembro = Miembro.objects.get(pk=miembro_id)
+                except Miembro.DoesNotExist:
+                    messages.error(req, 'El miembro seleccionado no existe.')
+                    return render(req, 'agregar-proyecto.html', {"nuevoproyecto": nuevoproyecto})
+            else:
+                miembro = None
 
             proyecto = Proyecto(
                 nombredeproyecto=data["nombredeproyecto"],
@@ -126,12 +130,12 @@ def agregar_proyecto(req):
     return render(req, 'agregar-proyecto.html')
 
 @login_required(login_url='/app-proyecto1/login')
-def buscar(request):
-    tipo_busqueda = request.GET.get('tipo_busqueda')
+def buscar(req):
+    tipo_busqueda = req.GET.get('tipo_busqueda')
     resultados = []
 
     try:
-        avatar = Avatar.objects.get(user=request.user.id)
+        avatar = Avatar.objects.get(user=req.user.id)
 
         if tipo_busqueda == 'tarea':
             resultados = Tarea.objects.all()
@@ -142,7 +146,7 @@ def buscar(request):
     except Avatar.DoesNotExist:
         avatar = None
 
-    return render(request, 'buscar.html', {'tipo_busqueda': tipo_busqueda, 'resultados': resultados, 'url_avatar': avatar.imagen.url if avatar else None})
+    return render(req, 'buscar.html', {'tipo_busqueda': tipo_busqueda, 'resultados': resultados, 'url_avatar': avatar.imagen.url if avatar else None})
 
 
 def detalle_tarea(req, tarea_id):

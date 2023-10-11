@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import User
-from .models import Avatar, Proyecto
+from .models import Avatar, Proyecto, Miembro
 
 
 class TareaFormulario(forms.Form):
@@ -27,7 +27,6 @@ class ProyectoFormulario(forms.Form):
     descripcion = forms.CharField(required=False, widget=forms.Textarea)
     fechaDeCreacion = forms.DateField(required=False)
     imagen = forms.ImageField(required=False)
-
 
 
 class MiembroFormulario(forms.Form):
